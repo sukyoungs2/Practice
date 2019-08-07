@@ -1,0 +1,38 @@
+public class BFmatch {
+	static int bfMatch(String txt, String pat) {
+		int pt=0; //기존 텍스트 
+		int pp=0; //패턴용
+		
+		while(pt!=txt.length() && pp !=pat.length()) {
+			if(txt.charAt(pt) == pat.charAt(pp)) {
+				pt++;
+				pp++;
+			} else {
+				pt = pt-pp+1;
+				pp = 0;
+			}
+		}
+		if(pp == pat.length())
+			return pt - pp;
+		return -1;
+	}
+	public static void main(String[] args) {
+		String s1 = "asfdsjdkj";
+		String s2 = "dkj";
+		
+		int idx = bfMatch(s1,s2);
+		if(idx==-1)
+			System.out.println("텍스트에 패턴없습니다");
+		else {
+			// 일치하는 문자 바로 앞까지 길이 구함
+			int len = 0;
+			for(int i=0; i < idx; i++)
+				len += s1.substring(i, i+1).getBytes().length;
+			len += s2.length();
+			
+			System.out.println((idx+1)+"번째 문자부터 일치");
+			System.out.println("텍스트:"+s1);
+			System.out.printf(String.format("패턴:%%%ds\n", len),s2);
+		}
+	}
+}

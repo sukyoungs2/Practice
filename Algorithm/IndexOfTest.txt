@@ -1,0 +1,26 @@
+public class IndexOfTester {
+	public static void main(String[] args) {
+		String s1 = "Summer";
+		String s2 = "er";
+		
+		int idx1 = s1.indexOf(s2);
+		int idx2 = s1.lastIndexOf(s2);
+		
+		if(idx1 == -1) {
+			System.out.println("패턴이 존재하지 않습니다");
+		}else {
+			//찾아낸 문자열의 바로 앞까지의 문자개수 구하기
+			int len1 = 0;
+			for(int i=0; i<idx1; i++)
+				len1 += s1.substring(i, i+1).getBytes().length;
+			len1 += s2.length();
+			
+			int len2 = 0;
+			for(int i1=0; i1<idx2; i1++)
+				len2 += s1.substring(i1,i1+1).getBytes().length;
+			len2 += s2.length();
+			System.out.printf(String.format("패턴: %%%ds\n", len1),s2);
+			System.out.printf(String.format("패턴:%%%ds\n", len2),s2);
+		}
+	}
+}
